@@ -1,0 +1,14 @@
+# Environment & System
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.local
+
+# Build & Dependencies
+node_modules/
+vendor/
+
+# Raw backups
+*.bak
+*.sql.gz
