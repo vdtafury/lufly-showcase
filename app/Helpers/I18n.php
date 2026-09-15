@@ -553,6 +553,43 @@ class I18n
             'cs' => 'Pondělí – Pátek: 08:30 – 18:00 (GMT+3)'
         ],
 
+        // Page Meta & SEO titles
+        'products_page_title' => [
+            'tr' => 'Tüm Vitrifiye Seramik Kataloğu (:total Ürün)',
+            'en' => 'Complete Sanitary Ceramics Catalog (:total Items)',
+            'cs' => 'Kompletní katalog sanitární keramiky (:total položek)'
+        ],
+        'products_page_desc' => [
+            'tr' => 'Lufly yüksek kaliteli vitrifiye seramikler, kanalsız asma klozetler ve tasarım lavaboların tam üretim kataloğunu keşfedin.',
+            'en' => 'Explore the complete production catalog of Lufly vitreous china sanitary ceramics, rimless toilets, and designer washbasins.',
+            'cs' => 'Prozkoumejte kompletní výrobní katalog sanitární keramiky Lufly, závěsných WC mís bez oplachového kruhu a designových umyvadel.'
+        ],
+        'collections_page_title' => [
+            'tr' => 'Mimari Vitrifiye Koleksiyonları & Sistemleri',
+            'en' => 'Architectural Sanitary Collections & Systems',
+            'cs' => 'Architektonické sanitární kolekce a systémy'
+        ],
+        'collections_page_desc' => [
+            'tr' => 'Lufly imza seramik serilerini keşfedin: kanalsız asma klozetler, tezgah üstü lavabolar, seramik bideler ve mimari armatürler.',
+            'en' => 'Discover Lufly signature ceramic collections: rimless wall-hung toilets, countertop washbasins, ceramic bidets, and architectural tapware.',
+            'cs' => 'Objevte charakteristické keramické kolekce Lufly: závěsná WC bez oplachového kruhu, umyvadla na desku, bidety a baterie.'
+        ],
+        'search_page_title' => [
+            'tr' => 'Ürün ve SKU Arama',
+            'en' => 'Product & SKU Search',
+            'cs' => 'Vyhledávání produktů a kódů SKU'
+        ],
+        'search_page_desc' => [
+            'tr' => 'Lufly kataloğundaki 282 sertifikalı vitrifiye seramik ürününü, kanalsız klozetleri ve lavaboları SKU veya ad ile arayın.',
+            'en' => 'Search all 282 certified sanitary ceramics, rimless toilets, and washbasins by SKU or name in the Lufly catalog.',
+            'cs' => 'Hledejte všech 282 certifikovaných sanitárních výrobků, klozetů a umyvadel podle kódu SKU nebo názvu v katalogu Lufly.'
+        ],
+        'models_suffix' => [
+            'tr' => 'Model',
+            'en' => 'Models',
+            'cs' => 'Modelů'
+        ],
+
         // 404
         'page_not_found_title' => [
             'tr' => '404 - Sayfa Bulunamadı',

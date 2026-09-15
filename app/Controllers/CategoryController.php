@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 use App\Config\App;
 use App\Core\Controller;
+use App\Helpers\I18n;
 use App\Helpers\SEO;
 use App\Models\Category;
 use App\Models\Product;
@@ -17,7 +18,7 @@ class CategoryController extends Controller
         $categories = $categoryModel->getAllActive();
 
         $breadcrumbs = [
-            'Collections' => '/collections'
+            I18n::t('nav_collections') => '/collections'
         ];
 
         $jsonLd = [
@@ -25,8 +26,8 @@ class CategoryController extends Controller
         ];
 
         $this->render('categories', [
-            'pageTitle' => 'Architectural Sanitary Collections & Systems | ' . App::NAME,
-            'metaDescription' => 'Discover Lufly signature ceramic collections: rimless wall-hung toilets, countertop washbasins, ceramic bidets, and architectural tapware.',
+            'pageTitle' => I18n::t('collections_page_title') . ' | ' . App::NAME,
+            'metaDescription' => I18n::t('collections_page_desc'),
             'canonicalUrl' => App::url('/collections'),
             'categories' => $categories,
             'breadcrumbs' => $breadcrumbs,
@@ -61,7 +62,7 @@ class CategoryController extends Controller
         $categories = $categoryModel->getAllActive();
 
         $breadcrumbs = [
-            'Collections' => '/collections',
+            I18n::t('nav_collections') => '/collections',
             $category['name'] => '/collections/' . $category['slug']
         ];
 
@@ -71,8 +72,8 @@ class CategoryController extends Controller
         ];
 
         $this->render('category', [
-            'pageTitle' => $category['name'] . ' (' . $total . ' Models) | ' . App::NAME . ' European Ceramics',
-            'metaDescription' => $category['description'] ?: 'Precision engineered ' . $category['name'] . ' from Lufly factory.',
+            'pageTitle' => $category['name'] . ' (' . $total . ' ' . I18n::t('models_suffix') . ') | ' . App::NAME . ' ' . I18n::t('brand_subhead'),
+            'metaDescription' => $category['description'] ?: $category['name'] . ' - ' . App::NAME . ' ' . I18n::t('hero_description'),
             'canonicalUrl' => App::url('/collections/' . $category['slug']),
             'category' => $category,
             'products' => $products,

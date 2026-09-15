@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 use App\Config\App;
 use App\Core\Controller;
+use App\Helpers\I18n;
 use App\Helpers\SEO;
 use App\Models\Category;
 use App\Models\Product;
@@ -33,12 +34,12 @@ class ProductController extends Controller
         $categories = $categoryModel->getAllActive();
 
         $breadcrumbs = [
-            'Products' => '/products'
+            I18n::t('nav_all_products') => '/products'
         ];
 
         $this->render('catalog_grid', [
-            'pageTitle' => 'Complete Sanitary Ceramics Catalog (' . $total . ' Items) | ' . App::NAME,
-            'metaDescription' => 'Explore the complete production catalog of Lufly vitreous china sanitary ceramics, rimless toilets, and designer washbasins.',
+            'pageTitle' => I18n::t('products_page_title', ['total' => $total]) . ' | ' . App::NAME,
+            'metaDescription' => I18n::t('products_page_desc'),
             'canonicalUrl' => App::url('/products'),
             'products' => $products,
             'total' => $total,
@@ -66,7 +67,7 @@ class ProductController extends Controller
         $related = $productModel->getRelated((int)$product['id'], 4);
 
         $breadcrumbs = [
-            'Collections' => '/collections',
+            I18n::t('nav_collections') => '/collections',
             $product['category_name'] => '/collections/' . ($product['category_slug'] ?? 'architectural-sanitary-ceramics'),
             $product['name'] => '/products/' . $product['slug']
         ];
@@ -77,8 +78,8 @@ class ProductController extends Controller
         ];
 
         $this->render('product', [
-            'pageTitle' => $product['name'] . ' (SKU: ' . $product['sku'] . ') | ' . App::NAME . ' European Ceramics',
-            'metaDescription' => $product['short_description'] ?: $product['name'] . ' manufactured by Lufly under European standards.',
+            'pageTitle' => $product['name'] . ' (SKU: ' . $product['sku'] . ') | ' . App::NAME . ' ' . I18n::t('brand_subhead'),
+            'metaDescription' => $product['short_description'] ?: $product['name'] . ' - ' . App::NAME . ' ' . I18n::t('hero_description'),
             'canonicalUrl' => App::url('/products/' . $product['slug']),
             'product' => $product,
             'gallery' => $gallery,

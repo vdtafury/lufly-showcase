@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 use App\Config\App;
 use App\Core\Controller;
+use App\Helpers\I18n;
 use App\Helpers\SEO;
 use App\Helpers\Security;
 use App\Models\Product;
@@ -22,16 +23,20 @@ class SearchController extends Controller
         }
 
         $breadcrumbs = [
-            'Search' => '/search'
+            I18n::t('search_page_title') => '/search'
         ];
 
         $jsonLd = [
             SEO::breadcrumbsSchema($breadcrumbs)
         ];
 
+        $pageTitle = $q !== '' 
+            ? I18n::t('search_results_for') . ' "' . Security::e($q) . '" | ' . App::NAME
+            : I18n::t('search_page_title') . ' | ' . App::NAME;
+
         $this->render('search', [
-            'pageTitle' => ($q !== '' ? 'Search results for "' . Security::e($q) . '"' : 'Product & SKU Search') . ' | ' . App::NAME,
-            'metaDescription' => 'Search all 282 certified sanitary ceramics, rimless toilets, and washbasins by SKU or name in the Lufly catalog.',
+            'pageTitle' => $pageTitle,
+            'metaDescription' => I18n::t('search_page_desc'),
             'canonicalUrl' => App::url('/search' . ($q !== '' ? '?q=' . urlencode($q) : '')),
             'query' => $q,
             'results' => $results,
