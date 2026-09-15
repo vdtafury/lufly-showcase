@@ -112,10 +112,10 @@ $currentLocale = $activeLocale ?? I18n::getLocale();
 <script>
 window.LUFLY_LOCALE = <?= json_encode($currentLocale) ?>;
 </script>
-<script src="/assets/js/app.js" defer></script>
+<script src="/assets/js/app.js?v=20260915-v3" defer></script>
 <?php if (isset($activeNav) && $activeNav === 'home'): ?>
-<script src="/assets/js/hero-video.js" defer></script>
+<script src="/assets/js/hero-video.js?v=20260915-v3" defer></script>
 <?php endif; ?>
 <?php if (isset($product)): ?>
-<script src="/assets/js/gallery.js" defer></script>
+<script src="/assets/js/gallery.js?v=20260915-v3" defer></script>
 <?php endif; ?>

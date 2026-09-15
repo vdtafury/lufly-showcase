@@ -59,7 +59,7 @@ $alternateUrls = $alternateUrls ?? I18n::getAlternateUrls($_SERVER['REQUEST_URI'
 <!-- Fonts & Stylesheet -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="/assets/css/lufly-luxury.css">
+<link rel="stylesheet" href="/assets/css/lufly-luxury.css?v=20260915-v3">
 
 <!-- Structured Data (JSON-LD) -->
 <?php if (!empty($jsonLd)): ?>

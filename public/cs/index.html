@@ -43,7 +43,7 @@
 <!-- Fonts & Stylesheet -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="/assets/css/lufly-luxury.css">
+<link rel="stylesheet" href="/assets/css/lufly-luxury.css?v=20260915-v3">
 
 <!-- Structured Data (JSON-LD) -->
             <script type="application/ld+json">
@@ -235,13 +235,409 @@
 
     <main id="main-content">
         
+<style>
+/* Scoped Hero Cinematic Critical Styles (Guaranteed Instant Zero-FOUC Render) */
+.hero-cinematic {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #0B1612;
+  color: #FFFFFF;
+  overflow: hidden;
+  width: 100%;
+}
+.hero-video-bg-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: brightness(0.48) contrast(1.15) saturate(0.85);
+  pointer-events: none;
+}
+.hero-bg-video.active {
+  opacity: 1;
+}
+.hero-cinematic-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(circle at 80% 25%, rgba(191, 161, 111, 0.12) 0%, transparent 55%),
+              linear-gradient(135deg, rgba(11, 22, 18, 0.96) 0%, rgba(11, 22, 18, 0.84) 48%, rgba(11, 22, 18, 0.6) 100%);
+}
+.hero-cinematic-inner {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding-top: 5rem;
+  padding-bottom: 3.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-cinematic-grid {
+  display: grid;
+  grid-template-columns: 1.22fr 0.78fr;
+  gap: 4.5rem;
+  align-items: center;
+}
+.hero-cinematic-story {
+  display: flex;
+  flex-direction: column;
+}
+.hero-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: #BFA16F;
+  margin-bottom: 1.5rem;
+  width: fit-content;
+}
+.pulse-beacon {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #BFA16F;
+  box-shadow: 0 0 0 0 rgba(191, 161, 111, 0.7);
+  animation: beaconPulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+@keyframes beaconPulse {
+  0% { box-shadow: 0 0 0 0 rgba(191, 161, 111, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(191, 161, 111, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(191, 161, 111, 0); }
+}
+.hero-display-title {
+  font-family: var(--font-heading, serif);
+  font-size: clamp(2.4rem, 4.8vw, 3.85rem);
+  font-weight: 500;
+  line-height: 1.14;
+  color: #FFFFFF;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.35rem;
+}
+.hero-text-desc {
+  font-size: 1.125rem;
+  line-height: 1.68;
+  color: #C9D6D0;
+  max-width: 580px;
+  margin-bottom: 2.25rem;
+  font-weight: 400;
+}
+.hero-actions-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
+}
+.btn-reel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.btn-reel:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: #BFA16F;
+  color: #BFA16F;
+  transform: translateY(-2px);
+}
+.reel-play-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #BFA16F;
+  color: #0B1612;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.hero-stat-item h4 {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.35rem;
+  color: #BFA16F;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.hero-stat-item p {
+  font-size: 0.75rem;
+  color: #A3B8B0;
+  line-height: 1.35;
+  margin: 0;
+}
+.hero-spotlight-wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+.hero-spotlight-card {
+  width: 100%;
+  max-width: 440px;
+  background: rgba(18, 41, 32, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  padding: 1.75rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+.hero-spotlight-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+.hero-spotlight-badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  color: #BFA16F;
+  background: rgba(191, 161, 111, 0.15);
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+.hero-spotlight-sku {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: #8FA79C;
+}
+.hero-spotlight-img-box {
+  width: 100%;
+  height: 250px;
+  background: #FFFFFF;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  margin-bottom: 1.35rem;
+  overflow: hidden;
+}
+.hero-spotlight-img-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-spotlight-card:hover .hero-spotlight-img-box img {
+  transform: scale(1.06);
+}
+.hero-spotlight-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 0.35rem;
+}
+.hero-spotlight-specs {
+  font-size: 0.8125rem;
+  color: #8FA79C;
+  font-family: var(--font-mono, monospace);
+  margin-bottom: 1.25rem;
+}
+.hero-timeline-controls {
+  position: relative;
+  z-index: 4;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(11, 22, 18, 0.6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 1rem 0;
+}
+.hero-timeline-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.hero-tabs-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  flex-grow: 1;
+  max-width: 860px;
+}
+.hero-tab-btn {
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  color: #8FA79C;
+  transition: color 0.25s ease;
+}
+.hero-tab-btn:hover, .hero-tab-btn.active {
+  color: #FFFFFF;
+}
+.hero-tab-progress-track {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.65rem;
+}
+.hero-tab-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #BFA16F;
+  transition: width 0.1s linear;
+}
+.hero-tab-btn.active .hero-tab-progress-fill {
+  background: #BFA16F;
+}
+.hero-tab-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+.hero-tab-num {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  color: #BFA16F;
+  font-weight: 600;
+}
+.hero-tab-title {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.hero-playback-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.hero-ctrl-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.hero-ctrl-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: #BFA16F;
+}
+.hero-theater-modal {
+  display: none !important;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.hero-theater-modal.open {
+  display: flex !important;
+}
+.theater-inner {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.theater-video-frame {
+  aspect-ratio: 16/9;
+  width: 100%;
+}
+.theater-video-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.theater-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+@media (max-width: 1024px) {
+  .hero-cinematic-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .hero-spotlight-wrap {
+    justify-content: center;
+  }
+}
+@media (max-width: 768px) {
+  .hero-stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hero-tabs-group {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
 <!-- Cinematic Architectural Hero with Multi-Scene Video Transitions -->
-<section class="hero-cinematic">
+<section class="hero-cinematic" style="position: relative; min-height: 88vh; background-color: #0B1612; color: #FFFFFF; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; width: 100%;">
     <!-- Ambient Background Videos Layer -->
-    <div class="hero-video-bg-wrapper">
-        <video class="hero-bg-video active" id="hero-video-1" src="/assets/videos/hero_scene_1.mp4" autoplay loop muted playsinline poster="/assets/images/products/lufly_146_1620-111-a.jpg"></video>
-        <video class="hero-bg-video" id="hero-video-2" src="/assets/videos/hero_scene_2.mp4" loop muted playsinline poster="/assets/images/products/lufly_205_ESINO.jpg"></video>
-        <video class="hero-bg-video" id="hero-video-3" src="/assets/videos/hero_scene_3.mp4" loop muted playsinline poster="/assets/images/products/lufly_2109_1654-001.jpg"></video>
+    <div class="hero-video-bg-wrapper" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; pointer-events: none;">
+        <video class="hero-bg-video active" id="hero-video-1" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; opacity: 1;" src="/assets/videos/hero_scene_1.mp4" autoplay loop muted playsinline poster="/assets/images/products/lufly_146_1620-111-a.jpg"></video>
+        <video class="hero-bg-video" id="hero-video-2" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; opacity: 0;" src="/assets/videos/hero_scene_2.mp4" loop muted playsinline poster="/assets/images/products/lufly_205_ESINO.jpg"></video>
+        <video class="hero-bg-video" id="hero-video-3" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; opacity: 0;" src="/assets/videos/hero_scene_3.mp4" loop muted playsinline poster="/assets/images/products/lufly_2109_1654-001.jpg"></video>
         <div class="hero-cinematic-overlay"></div>
     </div>
 
@@ -388,7 +784,7 @@
 </section>
 
 <!-- Fullscreen Cinematic Theater Modal -->
-<div class="hero-theater-modal" id="hero-theater-modal" role="dialog" aria-modal="true" aria-label="Přehrát video z výrobního závodu">
+<div class="hero-theater-modal" id="hero-theater-modal" style="display: none !important; position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.94); backdrop-filter: blur(16px);" role="dialog" aria-modal="true" aria-label="Přehrát video z výrobního závodu">
     <div class="theater-inner">
         <button type="button" class="theater-close-btn" id="hero-theater-close" aria-label="Zavřít video (Esc)">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
@@ -994,7 +1390,7 @@
 <script>
 window.LUFLY_LOCALE = "cs";
 </script>
-<script src="/assets/js/app.js" defer></script>
-<script src="/assets/js/hero-video.js" defer></script>
+<script src="/assets/js/app.js?v=20260915-v3" defer></script>
+<script src="/assets/js/hero-video.js?v=20260915-v3" defer></script>
 </body>
 </html>
