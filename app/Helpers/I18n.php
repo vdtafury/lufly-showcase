@@ -212,6 +212,76 @@ class I18n
             'en' => 'Precision-engineered rimless wall-hung toilets, designer countertop washbasins, and architectural tapware. Fired at 1,250°C for exceptional durability and European project specification.',
             'cs' => 'Precizní závěsné WC mísy bez oplachového kruhu, designová umyvadla na desku a architektonické baterie. Vypalováno při 1 250 °C pro výjimečnou odolnost.'
         ],
+        'hero_watch_film' => [
+            'tr' => 'Fabrika & Üretim Filmini İzle',
+            'en' => 'Watch Factory Production Reel',
+            'cs' => 'Přehrát video z výrobního závodu'
+        ],
+        'hero_scene_1_tag' => [
+            'tr' => '01 • MİMARİ BANYO VİTRİFİYESİ',
+            'en' => '01 • ARCHITECTURAL SANITARY SUITE',
+            'cs' => '01 • ARCHITEKTONICKÝ SANITÁRNÍ SET'
+        ],
+        'hero_scene_2_tag' => [
+            'tr' => '02 • 1.250°C VİTREOUS FIRINLAMA',
+            'en' => '02 • 1,250°C KILN PRECISION',
+            'cs' => '02 • PÁLENÍ PŘI 1 250 °C'
+        ],
+        'hero_scene_3_tag' => [
+            'tr' => '03 • MİNİMALİST HİDRODİNAMİK',
+            'en' => '03 • MINIMALIST HYDRODYNAMICS',
+            'cs' => '03 • MINIMALISTICKÁ HYDRODYNAMIKA'
+        ],
+        'hero_scene_1_title' => [
+            'tr' => 'Avrupa Yaşamı İçin Tasarlanan Mimari Vitrifiye Seramikleri.',
+            'en' => 'Architectural Sanitary Ceramics Engineered for European Living.',
+            'cs' => 'Architektonická sanitární keramika navržená pro evropský standard bydlení.'
+        ],
+        'hero_scene_2_title' => [
+            'tr' => '1.250°C Yüksek Yoğunluklu Vitreous China Dayanıklılığı.',
+            'en' => '1,250°C High-Density Vitreous China Resilience.',
+            'cs' => 'Vysoká odolnost sanitární keramiky Vitreous China pálené při 1 250 °C.'
+        ],
+        'hero_scene_3_title' => [
+            'tr' => 'Geometrik Zarafet ve Sessiz Kanalsız Hijyen Teknolojisi.',
+            'en' => 'Geometric Elegance Meets Silent Rimless Flush Dynamics.',
+            'cs' => 'Geometrická elegance spojená s tichou technologií splachování Rimless.'
+        ],
+        'hero_scene_1_desc' => [
+            'tr' => 'Gaziantep entegre tesislerimizde EN 997 standartlarında %100 yüksek kalite vitreous china\'dan üretilen kanalsız asma klozetler, tasarım lavabolar ve lüks armatürler.',
+            'en' => 'Precision-engineered rimless wall-hung toilets, designer countertop washbasins, and architectural tapware. Fired at 1,250°C for exceptional durability and European project specification.',
+            'cs' => 'Precizní závěsné WC mísy bez oplachového kruhu, designová umyvadla na desku a architektonické baterie. Vypalováno při 1 250 °C pro výjimečnou odolnost.'
+        ],
+        'hero_scene_2_desc' => [
+            'tr' => 'Mikron düzeyinde sır homojenliği, %0.5\'in altında sıfıra yakın su emme oranı ve ömür boyu çatlamazlık garantisi sunan robotik fırınlama.',
+            'en' => 'Sub-micron glaze uniformity, ultra-low <0.5% water absorption rate, and lifetime structural integrity achieved through robotic kiln firing.',
+            'cs' => 'Mikronová homogenita glazury, téměř nulová nasákavost < 0,5 % a celoživotní strukturální celistvost dosažená robotickým výpalem.'
+        ],
+        'hero_scene_3_desc' => [
+            'tr' => 'Klasik kanallı kenarları ortadan kaldıran 360° girdaplı akış dinamiği, her yıkamada %40 daha az su ile kusursuz temizlik sağlar.',
+            'en' => 'Aerodynamic 360° vortex flow dynamics eliminating concealed bacterial rims while conserving up to 40% water per flush cycle.',
+            'cs' => 'Aerodynamické 360° vírové splachování eliminuje skryté usazeniny a šetří až 40 % vody při každém spláchnutí.'
+        ],
+        'hero_tab_1' => [
+            'tr' => 'Banyo Koleksiyonu',
+            'en' => 'Sanitary Suite',
+            'cs' => 'Sanitární set'
+        ],
+        'hero_tab_2' => [
+            'tr' => 'Vitreous Üretim',
+            'en' => 'Kiln Precision',
+            'cs' => 'Keramický výpal'
+        ],
+        'hero_tab_3' => [
+            'tr' => 'Hidrodinamik',
+            'en' => 'Hydrodynamics',
+            'cs' => 'Hydrodynamika'
+        ],
+        'hero_close_video' => [
+            'tr' => 'Videoyu Kapat (Esc)',
+            'en' => 'Close Video (Esc)',
+            'cs' => 'Zavřít video (Esc)'
+        ],
         'hero_cta_explore' => [
             'tr' => 'Koleksiyonları Keşfedin',
             'en' => 'Explore Collections',

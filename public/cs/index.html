@@ -265,65 +265,169 @@
 
     <main id="main-content">
         
-<!-- Editorial Hero Section -->
-<section class="hero-editorial">
-    <div class="l-container hero-grid">
-        <div class="hero-content">
-            <span class="section-eyebrow">
-                Přímo z továrny &bull; Evropská preciznost            </span>
-            <h1 class="display-title">
-                Architektonická sanitární keramika navržená pro evropský standard bydlení.            </h1>
-            <p class="hero-description">
-                Precizní závěsné WC mísy bez oplachového kruhu, designová umyvadla na desku a architektonické baterie. Vypalováno při 1 250 °C pro výjimečnou odolnost.            </p>
-            <div class="hero-actions">
-                <a href="/cs/collections" class="btn btn-primary">
-                    <span>Prozkoumat kolekce</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-                <a href="/cs/catalog" class="btn btn-secondary">
-                    <span>Stáhnout katalog 2025</span>
-                </a>
-            </div>
+<!-- Cinematic Architectural Hero with Multi-Scene Video Transitions -->
+<section class="hero-cinematic">
+    <!-- Ambient Background Videos Layer -->
+    <div class="hero-video-bg-wrapper">
+        <video class="hero-bg-video active" id="hero-video-1" src="/assets/videos/hero_scene_1.mp4" autoplay loop muted playsinline poster="/assets/images/products/lufly_146_1620-111-a.jpg"></video>
+        <video class="hero-bg-video" id="hero-video-2" src="/assets/videos/hero_scene_2.mp4" loop muted playsinline poster="/assets/images/products/lufly_205_ESINO.jpg"></video>
+        <video class="hero-bg-video" id="hero-video-3" src="/assets/videos/hero_scene_3.mp4" loop muted playsinline poster="/assets/images/products/lufly_2109_1654-001.jpg"></video>
+        <div class="hero-cinematic-overlay"></div>
+    </div>
 
-            <div class="hero-badges-strip">
-                <div class="hero-badge-cell">
-                    <h4>1,250°C</h4>
-                    <p>Vysoká hustota střepu s nasákavostí < 0,5 % zaručuje mimořádnou odolnost proti mrazu a mechanickému zatížení.</p>
-                </div>
-                <div class="hero-badge-cell">
-                    <h4>EN 997</h4>
-                    <p>Hladký vnitřní povrch bez oplachového kruhu eliminuje usazování nečistot a bakterií a šetří až 40 % vody.</p>
-                </div>
-                <div class="hero-badge-cell">
-                    <h4>10 let</h4>
-                    <p>10 let tovární záruka</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="hero-visual-frame">
-            <div class="hero-visual-card">
-                <div class="hero-img-wrap">
-                    <img src="/assets/images/products/lufly_156_1620-111.jpg" 
-                         alt="Lufly Rimless Wall-Hung WC Suite - Model 1620-111" 
-                         width="500" 
-                         height="500" 
-                         loading="eager"
-                         fetchpriority="high">
-                </div>
-                <div class="hero-card-meta">
-                    <div>
-                        <div class="hero-card-sku">FLAGSHIP &bull; SKU: 1620-111</div>
-                        <div class="hero-card-title">Závěsná WC mísa Rimless</div>
+    <!-- Hero Content Layer -->
+    <div class="hero-cinematic-inner">
+        <div class="l-container">
+            <div class="hero-cinematic-grid">
+                <!-- Left Story Column -->
+                <div class="hero-cinematic-story">
+                    <div class="hero-pill-badge">
+                        <span class="pulse-beacon"></span>
+                        <span id="hero-scene-tag">01 • ARCHITEKTONICKÝ SANITÁRNÍ SET</span>
                     </div>
-                    <a href="/cs/products/rimless-wall-hung-wc-pan-ewo-sdh-128-146" class="btn btn-primary" style="padding: 0.5rem 0.9rem; font-size: 0.75rem;">
-                        <span>Zobrazit specifikaci</span>
-                    </a>
+
+                    <div class="hero-story-text">
+                        <h1 class="hero-display-title" id="hero-scene-title">
+                            Architektonická sanitární keramika navržená pro evropský standard bydlení.                        </h1>
+                        <p class="hero-text-desc" id="hero-scene-desc">
+                            Precizní závěsné WC mísy bez oplachového kruhu, designová umyvadla na desku a architektonické baterie. Vypalováno při 1 250 °C pro výjimečnou odolnost.                        </p>
+                    </div>
+
+                    <div class="hero-actions-bar">
+                        <a href="/cs/collections" class="btn btn-primary" style="padding: 0.85rem 1.75rem;">
+                            <span>Prozkoumat kolekce</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+
+                        <button type="button" class="btn-reel" id="hero-watch-reel-btn" aria-label="Přehrát video z výrobního závodu">
+                            <span class="reel-play-circle">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                            <span>Přehrát video z výrobního závodu</span>
+                        </button>
+
+                        <a href="/cs/catalog" class="btn btn-secondary" style="color: #FFFFFF; border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.06);">
+                            <span>Stáhnout katalog 2025</span>
+                        </a>
+                    </div>
+
+                    <div class="hero-stats-bar">
+                        <div class="hero-stat-item">
+                            <h4>1,250°C</h4>
+                            <p>Keramický výpal</p>
+                        </div>
+                        <div class="hero-stat-item">
+                            <h4>EN 997</h4>
+                            <p>Evropská norma</p>
+                        </div>
+                        <div class="hero-stat-item">
+                            <h4>10 let</h4>
+                            <p>10 let tovární záruka</p>
+                        </div>
+                        <div class="hero-stat-item">
+                            <h4>34+</h4>
+                            <p>Zemí exportu</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Spotlight Model Showcase Card -->
+                <div class="hero-spotlight-wrap">
+                    <div class="hero-spotlight-card" id="hero-spotlight-card">
+                        <div class="hero-spotlight-header">
+                            <span class="hero-spotlight-badge" id="hero-spotlight-badge">FLAGSHIP • EN 997</span>
+                            <span class="hero-spotlight-sku" id="hero-spotlight-sku">SKU: 1620-111</span>
+                        </div>
+
+                        <div class="hero-spotlight-img-box">
+                            <img src="/assets/images/products/lufly_146_1620-111-a.jpg" 
+                                 alt="Lufly Rimless Wall-Hung WC Pan" 
+                                 id="hero-spotlight-img"
+                                 width="420" 
+                                 height="300"
+                                 loading="eager"
+                                 fetchpriority="high">
+                        </div>
+
+                        <div class="hero-spotlight-title" id="hero-spotlight-title">
+                            Závěsná WC mísa Rimless                        </div>
+                        <div class="hero-spotlight-specs" id="hero-spotlight-specs">
+                            540 × 360 mm • Skrytá montáž na stěnu                        </div>
+
+                        <div class="hero-spotlight-footer">
+                            <a href="/cs/products/rimless-wall-hung-wc-pan-ewo-sdh-128-146" class="btn btn-primary" id="hero-spotlight-link" style="padding: 0.55rem 1rem; font-size: 0.8125rem; width: 100%; justify-content: center;">
+                                <span>Zobrazit specifikaci</span>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Timeline & Scene Switcher Bar -->
+    <div class="hero-timeline-controls">
+        <div class="l-container hero-timeline-grid">
+            <div class="hero-tabs-group" role="tablist" aria-label="Hero Scene Tabs">
+                <button type="button" class="hero-tab-btn active" data-scene="0" role="tab" aria-selected="true">
+                    <div class="hero-tab-progress-track">
+                        <div class="hero-tab-progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="hero-tab-meta">
+                        <span class="hero-tab-num">01</span>
+                        <span class="hero-tab-title">Sanitární set</span>
+                    </div>
+                </button>
+
+                <button type="button" class="hero-tab-btn" data-scene="1" role="tab" aria-selected="false">
+                    <div class="hero-tab-progress-track">
+                        <div class="hero-tab-progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="hero-tab-meta">
+                        <span class="hero-tab-num">02</span>
+                        <span class="hero-tab-title">Keramický výpal</span>
+                    </div>
+                </button>
+
+                <button type="button" class="hero-tab-btn" data-scene="2" role="tab" aria-selected="false">
+                    <div class="hero-tab-progress-track">
+                        <div class="hero-tab-progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="hero-tab-meta">
+                        <span class="hero-tab-num">03</span>
+                        <span class="hero-tab-title">Hydrodynamika</span>
+                    </div>
+                </button>
+            </div>
+
+            <div class="hero-playback-actions">
+                <button type="button" class="hero-ctrl-btn" id="hero-prev-btn" aria-label="Previous Scene">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button type="button" class="hero-ctrl-btn" id="hero-play-pause-btn" aria-label="Play or Pause Rotation">
+                    <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <button type="button" class="hero-ctrl-btn" id="hero-next-btn" aria-label="Next Scene">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
 </section>
+
+<!-- Fullscreen Cinematic Theater Modal -->
+<div class="hero-theater-modal" id="hero-theater-modal" role="dialog" aria-modal="true" aria-label="Přehrát video z výrobního závodu">
+    <div class="theater-inner">
+        <button type="button" class="theater-close-btn" id="hero-theater-close" aria-label="Zavřít video (Esc)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="theater-video-frame">
+            <video id="hero-theater-video" controls playsinline preload="none" src="/assets/videos/hero_scene_1.mp4"></video>
+        </div>
+    </div>
+</div>
 
 <!-- Curated Architectural Collections -->
 <section style="padding: 5rem 0; background-color: var(--c-white); border-bottom: 1px solid var(--c-divider);">
@@ -921,5 +1025,6 @@
 window.LUFLY_LOCALE = "cs";
 </script>
 <script src="/assets/js/app.js" defer></script>
+<script src="/assets/js/hero-video.js" defer></script>
 </body>
 </html>
