@@ -6,21 +6,21 @@
 <title>Ürün ve SKU Arama | Lufly</title>
 <meta name="description" content="Lufly kataloğundaki 282 sertifikalı vitrifiye seramik ürününü, kanalsız klozetleri ve lavaboları SKU veya ad ile arayın.">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<link rel="canonical" href="http://lufly-showcase.vercel.app/search">
+<link rel="canonical" href="https://lufly-showcase.vercel.app/search">
 
 <!-- Multilingual Hreflang Alternates (TR default, EN, CS) -->
-<link rel="alternate" hreflang="tr" href="http://lufly-showcase.vercel.app/search">
-<link rel="alternate" hreflang="en" href="http://lufly-showcase.vercel.app/en/search">
-<link rel="alternate" hreflang="cs" href="http://lufly-showcase.vercel.app/cs/search">
-<link rel="alternate" hreflang="x-default" href="http://lufly-showcase.vercel.app/search">
+<link rel="alternate" hreflang="tr" href="https://lufly-showcase.vercel.app/search">
+<link rel="alternate" hreflang="en" href="https://lufly-showcase.vercel.app/en/search">
+<link rel="alternate" hreflang="cs" href="https://lufly-showcase.vercel.app/cs/search">
+<link rel="alternate" hreflang="x-default" href="https://lufly-showcase.vercel.app/search">
 
 <!-- Open Graph / Social -->
 <meta property="og:site_name" content="Lufly Architectural Sanitary Ceramics">
 <meta property="og:type" content="website">
-<meta property="og:url" content="http://lufly-showcase.vercel.app/search">
+<meta property="og:url" content="https://lufly-showcase.vercel.app/search">
 <meta property="og:title" content="Ürün ve SKU Arama | Lufly">
 <meta property="og:description" content="Lufly kataloğundaki 282 sertifikalı vitrifiye seramik ürününü, kanalsız klozetleri ve lavaboları SKU veya ad ile arayın.">
-<meta property="og:image" content="http://lufly-showcase.vercel.app/assets/images/brand/logo.png">
+<meta property="og:image" content="https://lufly-showcase.vercel.app/assets/images/brand/logo.png">
 <meta property="og:locale" content="tr_TR">
         <meta property="og:locale:alternate" content="en_GB">
         <meta property="og:locale:alternate" content="cs_CZ">
@@ -29,7 +29,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ürün ve SKU Arama | Lufly">
 <meta name="twitter:description" content="Lufly kataloğundaki 282 sertifikalı vitrifiye seramik ürününü, kanalsız klozetleri ve lavaboları SKU veya ad ile arayın.">
-<meta name="twitter:image" content="http://lufly-showcase.vercel.app/assets/images/brand/logo.png">
+<meta name="twitter:image" content="https://lufly-showcase.vercel.app/assets/images/brand/logo.png">
 
 <!-- Geo & Technical Metadata -->
 <meta name="geo.region" content="TR-27">
@@ -55,13 +55,13 @@
             "@type": "ListItem",
             "position": 1,
             "name": "Ana Sayfa",
-            "item": "http://lufly-showcase.vercel.app"
+            "item": "https://lufly-showcase.vercel.app"
         },
         {
             "@type": "ListItem",
             "position": 2,
             "name": "Ürün ve SKU Arama",
-            "item": "http://lufly-showcase.vercel.app/search"
+            "item": "https://lufly-showcase.vercel.app/search"
         }
     ]
 }        </script>
@@ -204,13 +204,14 @@
     <div class="l-container">
         <div style="max-width: 760px; margin-bottom: 3rem;">
             <span class="section-eyebrow">Veri Tabanı Arama</span>
-            <h1 class="display-title" style="font-size: clamp(2rem, 3.5vw, 3rem); margin-top: 0.35rem;">
+            <h1 class="display-title" id="search-page-title" style="font-size: clamp(2rem, 3.5vw, 3rem); margin-top: 0.35rem;">
                 Ürün & Model Arama            </h1>
-            <p style="color: var(--c-muted); font-size: 1rem; margin-top: 0.5rem;">
+            <p id="search-page-desc" style="color: var(--c-muted); font-size: 1rem; margin-top: 0.5rem;">
                 Tüm 282 model arasında ürün kodu (SKU), koleksiyon veya boyutlara göre arama yapabilirsiniz.            </p>
 
-            <form method="GET" action="/search" style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
+            <form method="GET" action="/search" id="search-page-form" style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
                 <input type="text" 
+                       id="search-page-input"
                        name="q" 
                        value="" 
                        placeholder="Katalogda model veya SKU ara (örn. 1620, Lavabo, Batarya)..." 
@@ -222,7 +223,10 @@
             </form>
         </div>
 
-            </div>
+        <div id="search-results-container">
+                            <div id="search-results-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.75rem;"></div>
+                    </div>
+    </div>
 </section>
     </main>
 
@@ -244,12 +248,12 @@
             <div>
                 <h4 class="footer-col-title">Koleksiyonlar</h4>
                 <ul class="footer-nav-list">
-                    <li><a href="/collections/rimless-wall-hung-toilets">Koleksiyonlar: Rimless WCs</a></li>
-                    <li><a href="/collections/designer-washbasins">Koleksiyonlar: Washbasins</a></li>
-                    <li><a href="/collections/luxury-ceramic-bidets">Koleksiyonlar: Bidets</a></li>
-                    <li><a href="/collections/vanity-cabinet-systems">Koleksiyonlar: Cabinets</a></li>
-                    <li><a href="/collections/architectural-washbasin-mixers">Koleksiyonlar: Tapware</a></li>
-                    <li><a href="/collections/touchless-sensor-systems">Koleksiyonlar: Sensor Systems</a></li>
+                    <li><a href="/collections/rimless-wall-hung-toilets">Kanalsız Asma Klozetler</a></li>
+                    <li><a href="/collections/designer-washbasins">Tasarım Lavabolar</a></li>
+                    <li><a href="/collections/luxury-ceramic-bidets">Lüks Seramik Bideler</a></li>
+                    <li><a href="/collections/thermostatic-shower-systems">Termostatik Duş Sistemleri</a></li>
+                    <li><a href="/collections/architectural-washbasin-mixers">Mimari Bataryalar</a></li>
+                    <li><a href="/collections/touchless-sensor-systems">Temassız Sensörlü Sistemler</a></li>
                     <li><a href="/collections">Tüm Koleksiyonları İncele →</a></li>
                 </ul>
             </div>

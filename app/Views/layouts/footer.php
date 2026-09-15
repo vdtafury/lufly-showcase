@@ -27,12 +27,12 @@ $currentLocale = $activeLocale ?? I18n::getLocale();
             <div>
                 <h4 class="footer-col-title"><?= I18n::t('footer_collections_title') ?></h4>
                 <ul class="footer-nav-list">
-                    <li><a href="<?= locale_url('/collections/rimless-wall-hung-toilets') ?>"><?= I18n::t('nav_collections') ?>: Rimless WCs</a></li>
-                    <li><a href="<?= locale_url('/collections/designer-washbasins') ?>"><?= I18n::t('nav_collections') ?>: Washbasins</a></li>
-                    <li><a href="<?= locale_url('/collections/luxury-ceramic-bidets') ?>"><?= I18n::t('nav_collections') ?>: Bidets</a></li>
-                    <li><a href="<?= locale_url('/collections/vanity-cabinet-systems') ?>"><?= I18n::t('nav_collections') ?>: Cabinets</a></li>
-                    <li><a href="<?= locale_url('/collections/architectural-washbasin-mixers') ?>"><?= I18n::t('nav_collections') ?>: Tapware</a></li>
-                    <li><a href="<?= locale_url('/collections/touchless-sensor-systems') ?>"><?= I18n::t('nav_collections') ?>: Sensor Systems</a></li>
+                    <li><a href="<?= locale_url('/collections/rimless-wall-hung-toilets') ?>"><?= $currentLocale === 'tr' ? 'Kanalsız Asma Klozetler' : ($currentLocale === 'cs' ? 'Závěsná WC bez kruhu' : 'Rimless Wall-Hung WCs') ?></a></li>
+                    <li><a href="<?= locale_url('/collections/designer-washbasins') ?>"><?= $currentLocale === 'tr' ? 'Tasarım Lavabolar' : ($currentLocale === 'cs' ? 'Designová umyvadla' : 'Designer Washbasins') ?></a></li>
+                    <li><a href="<?= locale_url('/collections/luxury-ceramic-bidets') ?>"><?= $currentLocale === 'tr' ? 'Lüks Seramik Bideler' : ($currentLocale === 'cs' ? 'Keramické bidety' : 'Luxury Bidets') ?></a></li>
+                    <li><a href="<?= locale_url('/collections/thermostatic-shower-systems') ?>"><?= $currentLocale === 'tr' ? 'Termostatik Duş Sistemleri' : ($currentLocale === 'cs' ? 'Sprchové systémy' : 'Shower Systems') ?></a></li>
+                    <li><a href="<?= locale_url('/collections/architectural-washbasin-mixers') ?>"><?= $currentLocale === 'tr' ? 'Mimari Bataryalar' : ($currentLocale === 'cs' ? 'Umyvadlové baterie' : 'Architectural Mixers') ?></a></li>
+                    <li><a href="<?= locale_url('/collections/touchless-sensor-systems') ?>"><?= $currentLocale === 'tr' ? 'Temassız Sensörlü Sistemler' : ($currentLocale === 'cs' ? 'Bezdotykové systémy' : 'Touchless Sensor Systems') ?></a></li>
                     <li><a href="<?= locale_url('/collections') ?>"><?= I18n::t('footer_view_all_collections') ?></a></li>
                 </ul>
             </div>
