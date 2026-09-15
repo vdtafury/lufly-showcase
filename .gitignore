@@ -12,3 +12,5 @@ vendor/
 # Raw backups
 *.bak
 *.sql.gz
+.vercel
+.env*

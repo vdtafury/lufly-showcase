@@ -1,7 +1,114 @@
 [
-  "Architectural Ceramics",
-  "Designer Washbasins",
-  "Luxury Bidets",
-  "Vanity & Cabinets",
-  "Wall-Hung Toilets"
+    {
+        "id": 5,
+        "name": "Architectural Washbasin Mixers",
+        "slug": "architectural-washbasin-mixers",
+        "description": "Precision solid brass tapware with Swiss Neoperl aerators, ceramic disc cartridges, and PVD matte architectural finishes.",
+        "icon": "mixer",
+        "product_count": 96
+    },
+    {
+        "id": 12,
+        "name": "Sanitary Fittings & Accessories",
+        "slug": "sanitary-fittings-accessories",
+        "description": "Heavy brass and 304 stainless steel bathroom hardware: towel racks, grab rails, toilet roll holders, and shattafs.",
+        "icon": "accessories",
+        "product_count": 38
+    },
+    {
+        "id": 2,
+        "name": "Designer Washbasins",
+        "slug": "designer-washbasins",
+        "description": "Ultra-refined countertop, vessel, and vanity washbasins crafted with slim architectural profiles and ceramic purity.",
+        "icon": "basin",
+        "product_count": 30
+    },
+    {
+        "id": 7,
+        "name": "Thermostatic & Shower Systems",
+        "slug": "thermostatic-shower-systems",
+        "description": "Concealed thermostatic shower columns with 38°C anti-scald safety protection, stainless steel rain heads, and air-boosted hand showers.",
+        "icon": "shower",
+        "product_count": 25
+    },
+    {
+        "id": 8,
+        "name": "Touchless Sensor Systems",
+        "slug": "touchless-sensor-systems",
+        "description": "Commercial-grade infrared hands-free faucets and high-speed HEPA air hand dryers for hospitality and high-traffic airports.",
+        "icon": "sensor",
+        "product_count": 22
+    },
+    {
+        "id": 1,
+        "name": "Rimless Wall-Hung Toilets",
+        "slug": "rimless-wall-hung-toilets",
+        "description": "Aerodynamic rimless flush design with Nano-Shield hygienic glaze. 40% water conservation, European EN 997 certified.",
+        "icon": "toilet",
+        "product_count": 16
+    },
+    {
+        "id": 16,
+        "name": "Architectural Sanitary Ceramics",
+        "slug": "architectural-sanitary-ceramics",
+        "description": "Master collection of premium Turkish vitreous china sanitary ceramics crafted for large-scale export projects.",
+        "icon": "tiles",
+        "product_count": 15
+    },
+    {
+        "id": 6,
+        "name": "Kitchen & Utility Mixers",
+        "slug": "kitchen-utility-mixers",
+        "description": "Professional 360-degree swivel kitchen fixtures with dual-function spray heads and anti-calcification silicone nozzles.",
+        "icon": "kitchen-mixer",
+        "product_count": 14
+    },
+    {
+        "id": 15,
+        "name": "Toilet Seats & Accessories",
+        "slug": "toilet-seats-accessories",
+        "description": "Heavy-duty slim Duroplast toilet seats with quick-release stainless steel hinges and anti-microbial protection.",
+        "icon": "seat",
+        "product_count": 11
+    },
+    {
+        "id": 11,
+        "name": "Commercial Urinal Systems",
+        "slug": "commercial-urinal-systems",
+        "description": "Vitreous china waterless and low-flush commercial urinals and architectural privacy screen partitions.",
+        "icon": "urinal",
+        "product_count": 5
+    },
+    {
+        "id": 10,
+        "name": "Barrier-Free Accessible Sanitary Ware",
+        "slug": "barrier-free-accessible-sanitary-ware",
+        "description": "DIN 18040 and ADA compliant extended-projection ceramic bowls and reinforced stainless steel support systems.",
+        "icon": "accessible",
+        "product_count": 4
+    },
+    {
+        "id": 14,
+        "name": "Pedestals & Ceramic Shrouds",
+        "slug": "pedestals-ceramic-shrouds",
+        "description": "Vitreous china full and semi-pedestal ceramic shrouds for concealed siphon plumbing.",
+        "icon": "pedestal",
+        "product_count": 3
+    },
+    {
+        "id": 13,
+        "name": "Actuator Plates & Flush Systems",
+        "slug": "actuator-plates-flush-systems",
+        "description": "Architectural dual-flush pneumatic control plates and concealed in-wall cistern carrier frames.",
+        "icon": "flush",
+        "product_count": 2
+    },
+    {
+        "id": 3,
+        "name": "Luxury Ceramic Bidets",
+        "slug": "luxury-ceramic-bidets",
+        "description": "Wall-hung vitreous sanitary bidets manufactured to European EN 997 dimensional standards with concealed fixation.",
+        "icon": "bidet",
+        "product_count": 1
+    }
 ]
