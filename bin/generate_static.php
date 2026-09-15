@@ -126,9 +126,15 @@ $homeCtrl->notFound('Sayfa bulunamadı / Page not found', false);
 $page404 = ob_get_clean();
 file_put_contents($publicDir . '/404.html', $page404);
 
-// Root files sync for Vercel
-copy($publicDir . '/index.html', dirname(__DIR__) . '/index.html');
-copy($publicDir . '/catalog/index.html', dirname(__DIR__) . '/catalog.html');
+// Root files sync for Vercel and static hosting
+$rootDir = dirname(__DIR__);
+copy($publicDir . '/index.html', $rootDir . '/index.html');
+copy($publicDir . '/catalog/index.html', $rootDir . '/catalog.html');
+copy($publicDir . '/404.html', $rootDir . '/404.html');
+copy($publicDir . '/collections.html', $rootDir . '/collections.html');
+copy($publicDir . '/products.html', $rootDir . '/products.html');
+copy($publicDir . '/contact.html', $rootDir . '/contact.html');
+copy($publicDir . '/search.html', $rootDir . '/search.html');
 
 echo "--> Generating comprehensive Multilingual Sitemap (sitemap.xml)..." . PHP_EOL;
 $baseUrl = 'https://lufly.tr';
