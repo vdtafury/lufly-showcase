@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 use App\Config\App;
 use App\Core\Controller;
+use App\Helpers\I18n;
 use App\Helpers\SEO;
 use App\Models\Category;
 use App\Models\Product;
@@ -25,8 +26,8 @@ class HomeController extends Controller
         ];
 
         $this->render('home', [
-            'pageTitle' => App::NAME . ' | European Architectural Sanitary Ceramics & Factory Catalog',
-            'metaDescription' => App::DESCRIPTION,
+            'pageTitle' => App::NAME . ' | ' . I18n::t('hero_title'),
+            'metaDescription' => I18n::t('hero_description'),
             'canonicalUrl' => App::url('/'),
             'jsonLd' => $jsonLd,
             'featuredProducts' => $featuredProducts,

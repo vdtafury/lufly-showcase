@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 use App\Config\App;
 use App\Core\Controller;
+use App\Helpers\I18n;
 use App\Helpers\SEO;
 use App\Models\Product;
 
@@ -13,7 +14,7 @@ class CatalogController extends Controller
     public function index(): void
     {
         $breadcrumbs = [
-            'Digital Catalogs' => '/catalog'
+            I18n::t('nav_lookbook') => '/catalog'
         ];
 
         $jsonLd = [
@@ -21,8 +22,8 @@ class CatalogController extends Controller
         ];
 
         $this->render('catalog', [
-            'pageTitle' => '2025 European Master Catalog & Technical Binders | ' . App::NAME,
-            'metaDescription' => 'Download official Lufly 2025 sanitary ceramics catalogs, technical BIM/CAD specifications, and rimless flushing documentation.',
+            'pageTitle' => I18n::t('catalog_page_title') . ' | ' . App::NAME,
+            'metaDescription' => I18n::t('catalog_page_desc'),
             'canonicalUrl' => App::url('/catalog'),
             'breadcrumbs' => $breadcrumbs,
             'jsonLd' => $jsonLd,
@@ -44,7 +45,9 @@ class CatalogController extends Controller
             'items' => array_map(function ($p) {
                 return [
                     'sku' => $p['sku'],
-                    'name' => $p['name'],
+                    'name_tr' => $p['name_tr'] ?? $p['name'],
+                    'name_en' => $p['name_en'] ?? $p['name'],
+                    'name_cs' => $p['name_cs'] ?? $p['name'],
                     'category' => $p['category_name'],
                     'dimensions' => $p['dimensions'],
                     'mounting' => $p['mounting_type'],

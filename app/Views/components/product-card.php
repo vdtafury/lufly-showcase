@@ -1,10 +1,11 @@
 <?php
 declare(strict_types=1);
 
+use App\Helpers\I18n;
 use App\Helpers\Security;
 
 /** @var array $p */
-$productUrl = '/products/' . $p['slug'];
+$productUrl = locale_url('/products/' . $p['slug']);
 $primaryImg = !empty($p['primary_image']) ? $p['primary_image'] : '/assets/images/brand/placeholder.png';
 $categoryName = $p['category_name'] ?? 'Ceramics';
 $sku = $p['sku'] ?? ('LUF-' . $p['id']);
@@ -15,16 +16,16 @@ $dims = !empty($p['dimensions']) ? $p['dimensions'] : 'Technical specs inside';
     <div class="product-img-box">
         <span class="product-sku-tag" itemprop="sku"><?= Security::e($sku) ?></span>
         <?php if ($isFeatured): ?>
-            <span class="product-badge-featured">Featured</span>
+            <span class="product-badge-featured"><?= I18n::getLocale() === 'tr' ? 'Öne Çıkan' : (I18n::getLocale() === 'cs' ? 'Doporučeno' : 'Featured') ?></span>
         <?php endif; ?>
         
         <a href="<?= Security::e($productUrl) ?>" tabindex="-1" aria-hidden="true" style="display: block; width: 100%; height: 100%;">
             <img src="<?= Security::e($primaryImg) ?>" 
-                 alt="<?= Security::e($p['name']) ?> - Ceramic Sanitary Ware" 
+                 alt="<?= Security::e($p['name']) ?>" 
                  width="400" 
                  height="400" 
                  loading="lazy" 
-                 decoding="async"
+                 decoding="async" 
                  itemprop="image">
         </a>
     </div>
@@ -39,7 +40,7 @@ $dims = !empty($p['dimensions']) ? $p['dimensions'] : 'Technical specs inside';
         <div class="product-card-specs">
             <span class="product-dim-text"><?= Security::e($dims) ?></span>
             <a href="<?= Security::e($productUrl) ?>" class="product-view-link">
-                <span>View Specs</span>
+                <span><?= I18n::t('view_specs') ?></span>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
         </div>

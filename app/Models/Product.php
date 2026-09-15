@@ -4,13 +4,34 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Core\Model;
+use App\Helpers\I18n;
 use PDO;
 
 class Product extends Model
 {
+    public static function localize(array $p, ?string $locale = null): array
+    {
+        $loc = $locale ?? I18n::getLocale();
+        $p['name'] = $p['name_' . $loc] ?? $p['name_tr'] ?? $p['name'];
+        $p['category_name'] = $p['category_name_' . $loc] ?? $p['category_name_tr'] ?? $p['category_name'];
+        $p['short_description'] = $p['short_description_' . $loc] ?? $p['short_description_tr'] ?? $p['short_description'];
+        $p['description'] = $p['description_' . $loc] ?? $p['description_tr'] ?? $p['description'];
+        $p['material'] = $p['material_' . $loc] ?? $p['material_tr'] ?? $p['material'];
+        $p['mounting_type'] = $p['mounting_type_' . $loc] ?? $p['mounting_type_tr'] ?? $p['mounting_type'];
+        $p['finish'] = $p['finish_' . $loc] ?? $p['finish_tr'] ?? $p['finish'];
+        $p['warranty'] = $p['warranty_' . $loc] ?? $p['warranty_tr'] ?? $p['warranty'];
+        $p['standards'] = $p['standards_' . $loc] ?? $p['standards_tr'] ?? $p['standards'];
+        return $p;
+    }
+
+    public static function localizeList(array $products, ?string $locale = null): array
+    {
+        return array_map(fn($p) => self::localize($p, $locale), $products);
+    }
+
     public function getFeatured(int $limit = 8): array
     {
-        $sql = "SELECT p.*, c.name as category_name, c.slug as category_slug 
+        $sql = "SELECT p.*, c.name as category_name, c.name_tr as category_name_tr, c.name_en as category_name_en, c.name_cs as category_name_cs, c.slug as category_slug 
                 FROM products p 
                 LEFT JOIN categories c ON p.category_id = c.id 
                 WHERE p.is_featured = 1 
@@ -19,25 +40,27 @@ class Product extends Model
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return self::localizeList($stmt->fetchAll());
     }
 
     public function findBySlug(string $slug): ?array
     {
-        $sql = "SELECT p.*, c.name as category_name, c.slug as category_slug 
+        $sql = "SELECT p.*, c.name as category_name, c.name_tr as category_name_tr, c.name_en as category_name_en, c.name_cs as category_name_cs, c.slug as category_slug 
                 FROM products p 
                 LEFT JOIN categories c ON p.category_id = c.id 
                 WHERE p.slug = :slug LIMIT 1";
-        return $this->fetchOne($sql, ['slug' => $slug]);
+        $res = $this->fetchOne($sql, ['slug' => $slug]);
+        return $res ? self::localize($res) : null;
     }
 
     public function findById(int $id): ?array
     {
-        $sql = "SELECT p.*, c.name as category_name, c.slug as category_slug 
+        $sql = "SELECT p.*, c.name as category_name, c.name_tr as category_name_tr, c.name_en as category_name_en, c.name_cs as category_name_cs, c.slug as category_slug 
                 FROM products p 
                 LEFT JOIN categories c ON p.category_id = c.id 
                 WHERE p.id = :id LIMIT 1";
-        return $this->fetchOne($sql, ['id' => $id]);
+        $res = $this->fetchOne($sql, ['id' => $id]);
+        return $res ? self::localize($res) : null;
     }
 
     public function getGalleryImages(int $productId): array
@@ -51,7 +74,7 @@ class Product extends Model
 
     public function getRelated(int $productId, int $limit = 4): array
     {
-        $sql = "SELECT p.*, c.name as category_name, c.slug as category_slug 
+        $sql = "SELECT p.*, c.name as category_name, c.name_tr as category_name_tr, c.name_en as category_name_en, c.name_cs as category_name_cs, c.slug as category_slug 
                 FROM product_relations pr
                 JOIN products p ON pr.related_product_id = p.id
                 LEFT JOIN categories c ON p.category_id = c.id
@@ -73,7 +96,7 @@ class Product extends Model
                 $existingIds[] = $productId;
                 $inClause = implode(',', array_fill(0, count($existingIds), '?'));
 
-                $fallbackSql = "SELECT p.*, c.name as category_name, c.slug as category_slug 
+                $fallbackSql = "SELECT p.*, c.name as category_name, c.name_tr as category_name_tr, c.name_en as category_name_en, c.name_cs as category_name_cs, c.slug as category_slug 
                                 FROM products p 
                                 LEFT JOIN categories c ON p.category_id = c.id 
                                 WHERE p.category_id = ? AND p.id NOT IN ($inClause) 
@@ -86,7 +109,7 @@ class Product extends Model
             }
         }
 
-        return $related;
+        return self::localizeList($related);
     }
 
     public function getList(array $filters = [], int $limit = 24, int $offset = 0, string $sort = 'default'): array
@@ -105,22 +128,23 @@ class Product extends Model
         }
 
         if (!empty($filters['search'])) {
-            $conditions[] = "(p.name LIKE :search OR p.sku LIKE :search_sku OR p.description LIKE :search_desc)";
+            $conditions[] = "(p.sku LIKE :search OR p.name_tr LIKE :search OR p.name_en LIKE :search OR p.name_cs LIKE :search)";
             $params['search'] = '%' . $filters['search'] . '%';
-            $params['search_sku'] = '%' . $filters['search'] . '%';
-            $params['search_desc'] = '%' . $filters['search'] . '%';
         }
+
+        $loc = I18n::getLocale();
+        $nameCol = "p.name_{$loc}";
 
         $orderBy = match ($sort) {
             'price-asc'  => 'p.price ASC, p.id ASC',
             'price-desc' => 'p.price DESC, p.id ASC',
             'sku-asc'    => 'p.sku ASC',
-            'name-asc'   => 'p.name ASC',
+            'name-asc'   => "{$nameCol} ASC",
             default      => 'p.is_featured DESC, p.id ASC',
         };
 
         $where = implode(' AND ', $conditions);
-        $sql = "SELECT p.*, c.name as category_name, c.slug as category_slug 
+        $sql = "SELECT p.*, c.name as category_name, c.name_tr as category_name_tr, c.name_en as category_name_en, c.name_cs as category_name_cs, c.slug as category_slug 
                 FROM products p 
                 LEFT JOIN categories c ON p.category_id = c.id 
                 WHERE {$where} 
@@ -134,7 +158,7 @@ class Product extends Model
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return self::localizeList($stmt->fetchAll());
     }
 
     public function countList(array $filters = []): int
@@ -153,10 +177,8 @@ class Product extends Model
         }
 
         if (!empty($filters['search'])) {
-            $conditions[] = "(p.name LIKE :search OR p.sku LIKE :search_sku OR p.description LIKE :search_desc)";
+            $conditions[] = "(p.sku LIKE :search OR p.name_tr LIKE :search OR p.name_en LIKE :search OR p.name_cs LIKE :search)";
             $params['search'] = '%' . $filters['search'] . '%';
-            $params['search_sku'] = '%' . $filters['search'] . '%';
-            $params['search_desc'] = '%' . $filters['search'] . '%';
         }
 
         $where = implode(' AND ', $conditions);
@@ -168,11 +190,14 @@ class Product extends Model
     public function search(string $term, int $limit = 50): array
     {
         $wild = '%' . trim($term) . '%';
-        $sql = "SELECT p.*, c.name as category_name, c.slug as category_slug 
+        $sql = "SELECT p.*, c.name as category_name, c.name_tr as category_name_tr, c.name_en as category_name_en, c.name_cs as category_name_cs, c.slug as category_slug 
                 FROM products p 
                 LEFT JOIN categories c ON p.category_id = c.id 
-                WHERE p.sku LIKE :q1 OR p.name LIKE :q2 OR p.description LIKE :q3 OR c.name LIKE :q4
-                ORDER BY (CASE WHEN p.sku LIKE :q1 THEN 1 WHEN p.name LIKE :q2 THEN 2 ELSE 3 END), p.id ASC 
+                WHERE p.sku LIKE :q1 
+                   OR p.name_tr LIKE :q2 OR p.name_en LIKE :q2 OR p.name_cs LIKE :q2
+                   OR p.description_tr LIKE :q3 OR p.description_en LIKE :q3 OR p.description_cs LIKE :q3
+                   OR c.name_tr LIKE :q4 OR c.name_en LIKE :q4 OR c.name_cs LIKE :q4
+                ORDER BY (CASE WHEN p.sku LIKE :q1 THEN 1 WHEN p.name_tr LIKE :q2 OR p.name_en LIKE :q2 THEN 2 ELSE 3 END), p.id ASC 
                 LIMIT :limit";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':q1', $wild);
@@ -181,6 +206,6 @@ class Product extends Model
         $stmt->bindValue(':q4', $wild);
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return self::localizeList($stmt->fetchAll());
     }
 }

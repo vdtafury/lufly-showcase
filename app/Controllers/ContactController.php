@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 use App\Config\App;
 use App\Core\Controller;
+use App\Helpers\I18n;
 use App\Helpers\SEO;
 use App\Helpers\Security;
 use App\Models\Inquiry;
@@ -17,7 +18,7 @@ class ContactController extends Controller
         $prefillProduct = Security::sanitizeString((string)($_GET['product'] ?? ''));
 
         $breadcrumbs = [
-            'Direct Factory Inquiry' => '/contact'
+            I18n::t('nav_procurement') => '/contact'
         ];
 
         $jsonLd = [
@@ -28,8 +29,8 @@ class ContactController extends Controller
         $status = $_GET['status'] ?? null;
 
         $this->render('contact', [
-            'pageTitle' => 'Direct Factory Procurement & B2B Inquiry | ' . App::NAME,
-            'metaDescription' => 'Contact Lufly manufacturer headquarters in Gaziantep for commercial container export quotes, distributor partnerships, and CAD specs.',
+            'pageTitle' => I18n::t('contact_page_title') . ' | ' . App::NAME,
+            'metaDescription' => I18n::t('contact_page_desc'),
             'canonicalUrl' => App::url('/contact'),
             'prefillSku' => $prefillSku,
             'prefillProduct' => $prefillProduct,
@@ -43,13 +44,13 @@ class ContactController extends Controller
     public function submit(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('/contact');
+            $this->redirect(locale_url('/contact'));
             return;
         }
 
         $csrf = $_POST['csrf_token'] ?? '';
         if (!Security::verifyCsrf($csrf)) {
-            $this->redirect('/contact?status=csrf_error');
+            $this->redirect(locale_url('/contact?status=csrf_error'));
             return;
         }
 
@@ -63,7 +64,7 @@ class ContactController extends Controller
         $message = Security::sanitizeString((string)($_POST['message'] ?? ''));
 
         if (!$email || !$name || !$message) {
-            $this->redirect('/contact?status=validation_error');
+            $this->redirect(locale_url('/contact?status=validation_error'));
             return;
         }
 
@@ -80,6 +81,6 @@ class ContactController extends Controller
             'message'      => $message,
         ]);
 
-        $this->redirect('/contact?status=success');
+        $this->redirect(locale_url('/contact?status=success'));
     }
 }

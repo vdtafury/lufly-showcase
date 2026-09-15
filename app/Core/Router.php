@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+use App\Helpers\I18n;
+
 class Router
 {
     private array $routes = [];
@@ -39,6 +41,28 @@ class Router
         if ($cleanUri === '//') {
             $cleanUri = '/';
         }
+
+        // Multi-lingual locale resolution
+        $locale = 'tr'; // Default Turkish
+        if ($cleanUri === '/en' || str_starts_with($cleanUri, '/en/')) {
+            $locale = 'en';
+            $cleanUri = substr($cleanUri, 3);
+            $cleanUri = '/' . ltrim($cleanUri, '/');
+        } elseif ($cleanUri === '/cs' || str_starts_with($cleanUri, '/cs/')) {
+            $locale = 'cs';
+            $cleanUri = substr($cleanUri, 3);
+            $cleanUri = '/' . ltrim($cleanUri, '/');
+        } elseif ($cleanUri === '/tr' || str_starts_with($cleanUri, '/tr/')) {
+            $locale = 'tr';
+            $cleanUri = substr($cleanUri, 3);
+            $cleanUri = '/' . ltrim($cleanUri, '/');
+        }
+
+        if ($cleanUri === '//' || $cleanUri === '') {
+            $cleanUri = '/';
+        }
+
+        I18n::setLocale($locale);
 
         foreach ($this->routes as $route) {
             if ($route['method'] === $method && preg_match($route['pattern'], $cleanUri, $matches)) {

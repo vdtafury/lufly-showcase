@@ -2,8 +2,9 @@
 declare(strict_types=1);
 
 /**
- * Lufly Architectural Ceramics - Static Generator & Edge Compiler
+ * Lufly Architectural Ceramics - Static Generator & Multilingual Edge Compiler
  * Pre-renders all 282 products, 14 categories, and core views into production-grade HTML
+ * across 3 locales: Turkish (default root), English (/en), and Czech (/cs)
  * for lightning-fast Vercel edge deployment and 100/100 Core Web Vitals.
  */
 
@@ -21,9 +22,12 @@ spl_autoload_register(function (string $class) {
     if (file_exists($file)) require $file;
 });
 
+require_once dirname(__DIR__) . '/app/Helpers/I18n.php';
+
 use App\Config\App;
 use App\Config\Database;
 use App\Core\Router;
+use App\Helpers\I18n;
 
 $publicDir = dirname(__DIR__) . '/public';
 $db = Database::getConnection();
@@ -58,40 +62,67 @@ function renderRoute(string $uri, string $outFilePath): void {
     file_put_contents($target, $html);
 }
 
-echo "1. Generating core pages..." . PHP_EOL;
-renderRoute('/', 'index.html');
-renderRoute('/collections', 'collections/index.html');
-renderRoute('/products', 'products/index.html');
-renderRoute('/catalog', 'catalog/index.html');
-renderRoute('/contact', 'contact/index.html');
-renderRoute('/search', 'search/index.html');
-
-echo "2. Generating category pages..." . PHP_EOL;
+$locales = ['tr', 'en', 'cs'];
 $cats = $db->query("SELECT slug FROM categories WHERE product_count > 0")->fetchAll();
-foreach ($cats as $c) {
-    renderRoute('/collections/' . $c['slug'], 'collections/' . $c['slug'] . '/index.html');
-    renderRoute('/collections/' . $c['slug'], 'collections/' . $c['slug'] . '.html');
-}
-
-echo "3. Generating all 282 product pages..." . PHP_EOL;
 $prods = $db->query("SELECT slug FROM products ORDER BY id ASC")->fetchAll();
-$count = 0;
-foreach ($prods as $p) {
-    renderRoute('/products/' . $p['slug'], 'products/' . $p['slug'] . '/index.html');
-    renderRoute('/products/' . $p['slug'], 'products/' . $p['slug'] . '.html');
-    $count++;
-    if ($count % 50 === 0) {
-        echo "   Rendered {$count} / " . count($prods) . " products..." . PHP_EOL;
+
+echo "Starting Multilingual Edge Static Compilation (TR [Default], EN, CS)..." . PHP_EOL;
+
+foreach ($locales as $loc) {
+    $prefix = $loc === 'tr' ? '' : "/{$loc}";
+    $dirPrefix = $loc === 'tr' ? '' : "{$loc}/";
+
+    echo "--> Compiling locale: " . strtoupper($loc) . " (Prefix: '{$prefix}')" . PHP_EOL;
+
+    // 1. Core pages
+    echo "    1. Generating core pages for [{$loc}]..." . PHP_EOL;
+    $homeUri = $prefix === '' ? '/' : $prefix;
+    renderRoute($homeUri, "{$dirPrefix}index.html");
+
+    renderRoute("{$prefix}/collections", "{$dirPrefix}collections/index.html");
+    renderRoute("{$prefix}/collections", "{$dirPrefix}collections.html");
+
+    renderRoute("{$prefix}/products", "{$dirPrefix}products/index.html");
+    renderRoute("{$prefix}/products", "{$dirPrefix}products.html");
+
+    renderRoute("{$prefix}/catalog", "{$dirPrefix}catalog/index.html");
+    renderRoute("{$prefix}/catalog", "{$dirPrefix}catalog.html");
+
+    renderRoute("{$prefix}/contact", "{$dirPrefix}contact/index.html");
+    renderRoute("{$prefix}/contact", "{$dirPrefix}contact.html");
+
+    renderRoute("{$prefix}/search", "{$dirPrefix}search/index.html");
+    renderRoute("{$prefix}/search", "{$dirPrefix}search.html");
+
+    // 2. Category pages
+    echo "    2. Generating " . count($cats) . " category pages for [{$loc}]..." . PHP_EOL;
+    foreach ($cats as $c) {
+        renderRoute("{$prefix}/collections/{$c['slug']}", "{$dirPrefix}collections/{$c['slug']}/index.html");
+        renderRoute("{$prefix}/collections/{$c['slug']}", "{$dirPrefix}collections/{$c['slug']}.html");
+    }
+
+    // 3. Product pages
+    echo "    3. Generating " . count($prods) . " product pages for [{$loc}]..." . PHP_EOL;
+    $pCount = 0;
+    foreach ($prods as $p) {
+        renderRoute("{$prefix}/products/{$p['slug']}", "{$dirPrefix}products/{$p['slug']}/index.html");
+        renderRoute("{$prefix}/products/{$p['slug']}", "{$dirPrefix}products/{$p['slug']}.html");
+        $pCount++;
+        if ($pCount % 100 === 0) {
+            echo "       Rendered {$pCount} / " . count($prods) . " [{$loc}] products..." . PHP_EOL;
+        }
     }
 }
 
 // 404 page
+echo "--> Generating 404 page..." . PHP_EOL;
 $_SERVER['REQUEST_URI'] = '/404';
 $_SERVER['REQUEST_METHOD'] = 'GET';
 $_SERVER['HTTP_HOST'] = 'lufly-showcase.vercel.app';
+I18n::setLocale('tr');
 $homeCtrl = new \App\Controllers\HomeController();
 ob_start();
-$homeCtrl->notFound('Page not found');
+$homeCtrl->notFound('Sayfa bulunamadı / Page not found', false);
 $page404 = ob_get_clean();
 file_put_contents($publicDir . '/404.html', $page404);
 
@@ -99,4 +130,72 @@ file_put_contents($publicDir . '/404.html', $page404);
 copy($publicDir . '/index.html', dirname(__DIR__) . '/index.html');
 copy($publicDir . '/catalog/index.html', dirname(__DIR__) . '/catalog.html');
 
-echo "Pre-rendering completed successfully! Total products: {$count}" . PHP_EOL;
+echo "--> Generating comprehensive Multilingual Sitemap (sitemap.xml)..." . PHP_EOL;
+$baseUrl = 'https://lufly.tr';
+$xml = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
+$xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' . PHP_EOL;
+
+function addSitemapUrl(string $path, string $priority = '0.8', string $freq = 'weekly'): string {
+    global $baseUrl;
+    $clean = '/' . ltrim($path, '/');
+    if ($clean === '//') $clean = '/';
+
+    $trUrl = $clean === '/' ? $baseUrl : $baseUrl . $clean;
+    $enUrl = $clean === '/' ? "{$baseUrl}/en" : "{$baseUrl}/en{$clean}";
+    $csUrl = $clean === '/' ? "{$baseUrl}/cs" : "{$baseUrl}/cs{$clean}";
+
+    $out = "  <url>\n";
+    $out .= "    <loc>{$trUrl}</loc>\n";
+    $out .= "    <xhtml:link rel=\"alternate\" hreflang=\"tr\" href=\"{$trUrl}\"/>\n";
+    $out .= "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"{$enUrl}\"/>\n";
+    $out .= "    <xhtml:link rel=\"alternate\" hreflang=\"cs\" href=\"{$csUrl}\"/>\n";
+    $out .= "    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{$trUrl}\"/>\n";
+    $out .= "    <changefreq>{$freq}</changefreq>\n";
+    $out .= "    <priority>{$priority}</priority>\n";
+    $out .= "  </url>\n";
+
+    // Also add explicit URL entries for EN and CS
+    $out .= "  <url>\n";
+    $out .= "    <loc>{$enUrl}</loc>\n";
+    $out .= "    <xhtml:link rel=\"alternate\" hreflang=\"tr\" href=\"{$trUrl}\"/>\n";
+    $out .= "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"{$enUrl}\"/>\n";
+    $out .= "    <xhtml:link rel=\"alternate\" hreflang=\"cs\" href=\"{$csUrl}\"/>\n";
+    $out .= "    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{$trUrl}\"/>\n";
+    $out .= "    <changefreq>{$freq}</changefreq>\n";
+    $out .= "    <priority>{$priority}</priority>\n";
+    $out .= "  </url>\n";
+
+    $out .= "  <url>\n";
+    $out .= "    <loc>{$csUrl}</loc>\n";
+    $out .= "    <xhtml:link rel=\"alternate\" hreflang=\"tr\" href=\"{$trUrl}\"/>\n";
+    $out .= "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"{$enUrl}\"/>\n";
+    $out .= "    <xhtml:link rel=\"alternate\" hreflang=\"cs\" href=\"{$csUrl}\"/>\n";
+    $out .= "    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{$trUrl}\"/>\n";
+    $out .= "    <changefreq>{$freq}</changefreq>\n";
+    $out .= "    <priority>{$priority}</priority>\n";
+    $out .= "  </url>\n";
+
+    return $out;
+}
+
+$xml .= addSitemapUrl('/', '1.0', 'daily');
+$xml .= addSitemapUrl('/collections', '0.9', 'daily');
+$xml .= addSitemapUrl('/products', '0.9', 'daily');
+$xml .= addSitemapUrl('/catalog', '0.8', 'monthly');
+$xml .= addSitemapUrl('/contact', '0.8', 'monthly');
+
+foreach ($cats as $c) {
+    $xml .= addSitemapUrl('/collections/' . $c['slug'], '0.85', 'weekly');
+}
+
+foreach ($prods as $p) {
+    $xml .= addSitemapUrl('/products/' . $p['slug'], '0.75', 'weekly');
+}
+
+$xml .= '</urlset>' . PHP_EOL;
+
+file_put_contents($publicDir . '/sitemap.xml', $xml);
+copy($publicDir . '/sitemap.xml', dirname(__DIR__) . '/sitemap.xml');
+
+echo "Pre-rendering completed successfully across all 3 languages!" . PHP_EOL;
+echo "Total static pages generated: " . (count($locales) * (6 + count($cats) + count($prods))) . PHP_EOL;

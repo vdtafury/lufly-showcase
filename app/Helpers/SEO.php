@@ -15,9 +15,9 @@ class SEO
             'name' => App::NAME,
             'legalName' => App::FULL_LEGAL_NAME,
             'url' => App::url('/'),
-            'logo' => App::url('/assets/images/brand/logo.png'),
-            'image' => App::url('/assets/images/brand/logo.png'),
-            'description' => App::DESCRIPTION,
+            'logo' => App::url('/assets/images/brand/logo.png', 'tr'),
+            'image' => App::url('/assets/images/brand/logo.png', 'tr'),
+            'description' => I18n::t('footer_tagline'),
             'foundingDate' => (string)App::FOUNDED_YEAR,
             'address' => [
                 '@type' => 'PostalAddress',
@@ -33,14 +33,14 @@ class SEO
                     'contactType' => 'sales',
                     'email' => App::SALES_EMAIL,
                     'areaServed' => ['European Union', 'United Kingdom', 'Middle East', 'Worldwide'],
-                    'availableLanguage' => ['English', 'Turkish'],
+                    'availableLanguage' => ['Turkish', 'English', 'Czech'],
                 ],
                 [
                     '@type' => 'ContactPoint',
                     'telephone' => App::PHONE,
                     'contactType' => 'customer service',
                     'email' => App::EMAIL,
-                    'availableLanguage' => ['English', 'Turkish'],
+                    'availableLanguage' => ['Turkish', 'English', 'Czech'],
                 ]
             ],
             'sameAs' => [
@@ -55,6 +55,7 @@ class SEO
             '@context' => 'https://schema.org',
             '@type' => 'WebSite',
             'name' => App::NAME . ' Architectural Sanitary Ceramics',
+            'inLanguage' => I18n::getLocale(),
             'url' => App::url('/'),
             'potentialAction' => [
                 '@type' => 'SearchAction',
@@ -72,7 +73,7 @@ class SEO
         $list[] = [
             '@type' => 'ListItem',
             'position' => $position++,
-            'name' => 'Home',
+            'name' => I18n::t('nav_home'),
             'item' => App::url('/')
         ];
 
@@ -95,11 +96,12 @@ class SEO
     public static function productSchema(array $p): array
     {
         $price = (float)($p['price'] ?? 0);
-        $primaryImg = str_starts_with($p['primary_image'] ?? '', 'http') ? $p['primary_image'] : App::url($p['primary_image'] ?? '/assets/images/brand/placeholder.png');
+        $primaryImg = str_starts_with($p['primary_image'] ?? '', 'http') ? $p['primary_image'] : App::url($p['primary_image'] ?? '/assets/images/brand/placeholder.png', 'tr');
         
         return [
             '@context' => 'https://schema.org',
             '@type' => 'Product',
+            'inLanguage' => I18n::getLocale(),
             'name' => $p['name'],
             'image' => [$primaryImg],
             'description' => strip_tags((string)($p['description'] ?? $p['short_description'] ?? '')),
@@ -113,7 +115,7 @@ class SEO
                 '@type' => 'Organization',
                 'name' => App::FULL_LEGAL_NAME
             ],
-            'material' => $p['material'] ?? '100% Vitreous China',
+            'material' => $p['material'] ?? '%100 Vitreous China',
             'offers' => [
                 '@type' => 'Offer',
                 'url' => App::url('/products/' . ($p['slug'] ?? '')),

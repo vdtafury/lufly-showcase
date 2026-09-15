@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
+
+$htmlLang = $htmlLang ?? 'tr';
 ?>
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="<?= $htmlLang ?>">
 <head>
     <?php require __DIR__ . '/meta.php'; ?>
 </head>

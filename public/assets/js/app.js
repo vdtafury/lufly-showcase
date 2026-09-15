@@ -4,6 +4,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    const loc = window.LUFLY_LOCALE || 'tr';
+    const locPrefix = loc === 'tr' ? '' : `/${loc}`;
+
     // 1. Mobile Navigation Toggle
     const mobileBtn = document.querySelector('.mobile-nav-toggle');
     const mobileDrawer = document.getElementById('mobile-drawer');
@@ -94,26 +97,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(res => res.json())
                     .then(items => {
                         if (!items || items.length === 0) {
-                            searchResults.innerHTML = `<div style="padding: 1.5rem; text-align: center; color: var(--c-muted); font-size: 0.875rem;">No technical specifications found for "${escapeHtml(query)}". <br><a href="/products" style="text-decoration: underline; color: var(--c-forest); margin-top: 0.5rem; display: inline-block;">Browse All Collections</a></div>`;
+                            const emptyMsg = loc === 'tr' 
+                                ? `"${escapeHtml(query)}" ile eşleşen model bulunamadı.<br><a href="${locPrefix}/products" style="text-decoration: underline; color: var(--c-forest); margin-top: 0.5rem; display: inline-block;">Tüm Ürünleri İncele</a>`
+                                : (loc === 'cs'
+                                    ? `Pro "${escapeHtml(query)}" nebyly nalezeny žádné modely.<br><a href="${locPrefix}/products" style="text-decoration: underline; color: var(--c-forest); margin-top: 0.5rem; display: inline-block;">Procházet všechny produkty</a>`
+                                    : `No models found for "${escapeHtml(query)}".<br><a href="${locPrefix}/products" style="text-decoration: underline; color: var(--c-forest); margin-top: 0.5rem; display: inline-block;">Browse All Collections</a>`);
+                            searchResults.innerHTML = `<div style="padding: 1.5rem; text-align: center; color: var(--c-muted); font-size: 0.875rem;">${emptyMsg}</div>`;
                             return;
                         }
 
+                        const viewText = loc === 'tr' ? 'İncele &rarr;' : (loc === 'cs' ? 'Zobrazit &rarr;' : 'View &rarr;');
+                        const viewAllText = loc === 'tr' ? 'Tüm Eşleşen Modelleri Gör &rarr;' : (loc === 'cs' ? 'Zobrazit všechny výsledky &rarr;' : 'View All Matching Products &rarr;');
+
                         let html = '<div style="display: flex; flex-direction: column; gap: 0.25rem;">';
                         items.forEach(p => {
+                            const targetUrl = locPrefix + p.url;
                             html += `
-                                <a href="${escapeHtml(p.url)}" class="search-result-item">
+                                <a href="${escapeHtml(targetUrl)}" class="search-result-item">
                                     <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" class="search-item-thumb" width="50" height="50" loading="lazy">
                                     <div style="flex-grow: 1;">
                                         <div style="font-size: 0.875rem; font-weight: 600; color: var(--c-obsidian);">${escapeHtml(p.name)}</div>
                                         <div style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--c-eucalyptus);">${escapeHtml(p.sku)} &bull; ${escapeHtml(p.category_name)}</div>
                                     </div>
-                                    <span style="font-size: 0.75rem; color: var(--c-forest); font-weight: 500;">View &rarr;</span>
+                                    <span style="font-size: 0.75rem; color: var(--c-forest); font-weight: 500;">${viewText}</span>
                                 </a>
                             `;
                         });
                         html += `</div>
                         <div style="padding: 0.75rem; text-align: center; border-top: 1px solid var(--c-divider-subtle); margin-top: 0.5rem;">
-                            <a href="/search?q=${encodeURIComponent(query)}" style="font-size: 0.8125rem; font-weight: 600; color: var(--c-forest);">View All Matching Products &rarr;</a>
+                            <a href="${locPrefix}/search?q=${encodeURIComponent(query)}" style="font-size: 0.8125rem; font-weight: 600; color: var(--c-forest);">${viewAllText}</a>
                         </div>`;
                         searchResults.innerHTML = html;
                     })

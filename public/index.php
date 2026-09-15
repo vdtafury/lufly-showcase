@@ -28,6 +28,8 @@ spl_autoload_register(function (string $class) {
     }
 });
 
+require_once dirname(__DIR__) . '/app/Helpers/I18n.php';
+
 // Start session securely
 use App\Helpers\Security;
 Security::startSession();

@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+require_once dirname(__DIR__) . '/Helpers/I18n.php';
+
+use App\Helpers\I18n;
 use RuntimeException;
 
 abstract class Controller
@@ -16,6 +19,19 @@ abstract class Controller
         if (!file_exists($viewPath)) {
             throw new RuntimeException("View file not found: {$viewPath}");
         }
+
+        $currentUri = $_SERVER['REQUEST_URI'] ?? '/';
+        $loc = I18n::getLocale();
+
+        // Default multilingual data injected into all views
+        $defaults = [
+            'activeLocale'  => $loc,
+            'htmlLang'      => $loc,
+            'ogLocale'      => I18n::OG_LOCALES[$loc] ?? 'tr_TR',
+            'alternateUrls' => I18n::getAlternateUrls($currentUri)
+        ];
+
+        $data = array_merge($defaults, $data);
 
         // Extract variables into view scope
         extract($data, EXTR_SKIP);
@@ -53,15 +69,17 @@ abstract class Controller
         exit;
     }
 
-    public function notFound(string $message = 'Page not found'): void
+    public function notFound(string $message = '', bool $exit = true): void
     {
         http_response_code(404);
         $this->render('404', [
-            'pageTitle' => '404 - Page Not Found | Lufly Architectural Ceramics',
-            'metaDescription' => 'The requested page could not be found.',
-            'errorMessage' => $message,
-            'canonicalUrl' => '/404'
+            'pageTitle' => I18n::t('page_not_found_title') . ' | Lufly',
+            'metaDescription' => I18n::t('page_not_found_desc'),
+            'errorMessage' => $message ?: I18n::t('page_not_found_desc'),
+            'canonicalUrl' => I18n::url('/404')
         ]);
-        exit;
+        if ($exit) {
+            exit;
+        }
     }
 }

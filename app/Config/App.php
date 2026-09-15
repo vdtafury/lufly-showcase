@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use App\Helpers\I18n;
+
 class App
 {
     public const NAME = 'Lufly';
@@ -27,14 +29,18 @@ class App
     public static function baseUrl(): string
     {
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ? 'https://' : 'http://';
-        $host = $_SERVER['HTTP_HOST'] ?? 'localhost:8000';
+        $host = $_SERVER['HTTP_HOST'] ?? 'lufly-showcase.vercel.app';
         return rtrim($protocol . $host, '/');
     }
 
-    public static function url(string $path = ''): string
+    public static function url(string $path = '', ?string $locale = null): string
     {
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
         $base = self::baseUrl();
-        $cleanPath = '/' . ltrim($path, '/');
+        $locPath = I18n::url($path, $locale);
+        $cleanPath = '/' . ltrim($locPath, '/');
         return $cleanPath === '/' ? $base : $base . $cleanPath;
     }
 }
