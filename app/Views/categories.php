@@ -24,22 +24,27 @@ $loc = I18n::getLocale();
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem;">
             <?php foreach ($categories as $cat): ?>
                 <div class="category-card">
-                    <div class="category-card-header">
-                        <div class="category-icon-box">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v16H4V4zm2 2v12h12V6H6z"/></svg>
+                    <a href="<?= locale_url('/collections/' . $cat['slug']) ?>" class="category-card-thumb" aria-label="<?= Security::e($cat['name']) ?>">
+                        <img src="<?= Security::e($cat['thumbnail']) ?>" 
+                             alt="<?= Security::e($cat['name']) ?>" 
+                             loading="lazy" 
+                             decoding="async"
+                             width="400" 
+                             height="260">
+                        <span class="category-count-badge"><?= (int)$cat['product_count'] ?> <?= I18n::t('models_suffix') ?></span>
+                    </a>
+                    <div class="category-card-body">
+                        <h2 class="category-card-title">
+                            <a href="<?= locale_url('/collections/' . $cat['slug']) ?>"><?= Security::e($cat['name']) ?></a>
+                        </h2>
+                        <p class="category-card-desc"><?= Security::e($cat['description']) ?></p>
+                        <div class="category-card-footer">
+                            <a href="<?= locale_url('/collections/' . $cat['slug']) ?>" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8125rem;">
+                                <span><?= $loc === 'tr' ? 'Koleksiyonu İncele' : ($loc === 'cs' ? 'Zobrazit kolekci' : 'View Collection') ?></span>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                            <span class="category-spec-tag">EN 997 / CE</span>
                         </div>
-                        <span class="category-count-badge"><?= (int)$cat['product_count'] ?> <?= I18n::t('models_found') ?></span>
-                    </div>
-                    <h2 class="category-card-title">
-                        <a href="<?= locale_url('/collections/' . $cat['slug']) ?>"><?= Security::e($cat['name']) ?></a>
-                    </h2>
-                    <p class="category-card-desc"><?= Security::e($cat['description']) ?></p>
-                    <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--c-divider-subtle); display: flex; justify-content: space-between; align-items: center;">
-                        <a href="<?= locale_url('/collections/' . $cat['slug']) ?>" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8125rem;">
-                            <span><?= $loc === 'tr' ? 'Koleksiyonu İncele' : ($loc === 'cs' ? 'Zobrazit kolekci' : 'View Collection') ?></span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </a>
-                        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--c-eucalyptus);">EN 997 / CE</span>
                     </div>
                 </div>
             <?php endforeach; ?>
