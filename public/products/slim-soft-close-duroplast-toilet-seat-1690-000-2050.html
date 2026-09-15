@@ -118,48 +118,7 @@
 }        </script>
     </head>
 <body>
-    <!-- Topbar -->
-<div class="site-topbar">
-    <div class="l-container topbar-content">
-        <div class="topbar-badges">
-            <span class="topbar-badge-item">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                <span>EN 997 & CE Sertifikalı Vitreous China</span>
-            </span>
-            <span class="topbar-badge-item">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"/></svg>
-                <span>10 Yıl Fabrika Garantisi</span>
-            </span>
-            <span class="topbar-badge-item" style="color: var(--c-champagne);">
-                <span>34+ Ülkeye İhracat</span>
-            </span>
-        </div>
-        <div class="topbar-links">
-            <a href="tel:+908503040817">
-                <span>Tel: +90 850 3040 817</span>
-            </a>
-            <span style="opacity: 0.3;">|</span>
-            <a href="mailto:info@lufly.tr">
-                <span>info@lufly.tr</span>
-            </a>
-            <span style="opacity: 0.3;">|</span>
-            <a href="https://wa.me/+908503040817?text=Merhaba+Lufly+%C4%B0hracat+Departman%C4%B1%2C+fabrika+konteyner+tedari%C4%9Fi+hakk%C4%B1nda+bilgi+almak+istiyorum." target="_blank" rel="noopener" style="color: #25D366; font-weight: 500;">
-                <span>WhatsApp B2B Masası</span>
-            </a>
-            <span style="opacity: 0.3;">|</span>
-            <!-- Architectural Language Switcher (TR | EN | CS) -->
-            <div class="lang-switcher" aria-label="Language selection">
-                <a href="/products/slim-soft-close-duroplast-toilet-seat-1690-000-2050" class="lang-btn active" title="Türkçe">TR</a>
-                <span class="lang-sep">/</span>
-                <a href="/en/products/slim-soft-close-duroplast-toilet-seat-1690-000-2050" class="lang-btn " title="English">EN</a>
-                <span class="lang-sep">/</span>
-                <a href="/cs/products/slim-soft-close-duroplast-toilet-seat-1690-000-2050" class="lang-btn " title="Čeština">CS</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Main Header -->
+    <!-- Main Header (Single Architectural Navigation Bar) -->
 <header class="site-header" id="site-header">
     <div class="l-container header-inner">
         <!-- Brand Mark -->
@@ -189,6 +148,13 @@
                 <span>Katalogda ara...</span>
                 <span class="search-shortcut">⌘K</span>
             </button>
+
+            <!-- Minimalist Language Switcher (TR | EN | CS) -->
+            <div class="header-lang-switcher" aria-label="Language selection">
+                <a href="/products/slim-soft-close-duroplast-toilet-seat-1690-000-2050" class="header-lang-btn active" title="Türkçe">TR</a>
+                <a href="/en/products/slim-soft-close-duroplast-toilet-seat-1690-000-2050" class="header-lang-btn " title="English">EN</a>
+                <a href="/cs/products/slim-soft-close-duroplast-toilet-seat-1690-000-2050" class="header-lang-btn " title="Čeština">CS</a>
+            </div>
 
             <a href="/contact" class="btn btn-primary" style="padding: 0.65rem 1.25rem; font-size: 0.8125rem;">
                 <span>B2B Teklif İste</span>
@@ -233,36 +199,40 @@
 </div>
 
 <style>
-.lang-switcher {
+.header-lang-switcher {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
+    background-color: var(--c-dolomite, #F9FAF7);
+    border: 1px solid var(--c-divider, #E5ECE8);
+    border-radius: var(--radius-sm, 4px);
+    padding: 2px;
     font-family: var(--font-mono, monospace);
     font-size: 0.6875rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
-.lang-btn {
-    color: rgba(255, 255, 255, 0.7);
+.header-lang-btn {
+    color: var(--c-muted, #5A6D63);
     text-decoration: none;
-    padding: 0.15rem 0.35rem;
+    padding: 0.35rem 0.6rem;
     border-radius: 2px;
     transition: all 0.2s ease;
+    font-weight: 500;
 }
-.lang-btn:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.1);
+.header-lang-btn:hover {
+    color: var(--c-forest, #122920);
 }
-.lang-btn.active {
-    color: var(--c-champagne, #BFA16F);
+.header-lang-btn.active {
+    color: var(--c-forest, #122920);
+    background-color: var(--c-white, #FFFFFF);
     font-weight: 700;
-    border-bottom: 2px solid var(--c-champagne, #BFA16F);
-}
-.lang-sep {
-    opacity: 0.35;
-    font-size: 0.625rem;
+    box-shadow: 0 1px 3px rgba(11, 22, 18, 0.08);
 }
 #mobile-drawer.open { display: block !important; }
+@media (max-width: 768px) {
+    .header-lang-switcher {
+        display: none;
+    }
+}
 </style>
 
     <main id="main-content">

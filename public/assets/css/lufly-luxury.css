@@ -226,48 +226,38 @@ h1, h2, h3, h4, h5 {
   color: var(--c-eucalyptus);
 }
 
-/* Header & Navigation Bar */
-.site-topbar {
-  background-color: var(--c-obsidian);
-  color: #c9d6d0;
-  font-size: 0.75rem;
-  font-family: var(--font-mono);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.5rem 0;
-}
-
-.topbar-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.topbar-badges {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.topbar-badge-item {
+/* Minimalist Header Language Switcher (Segmented Control) */
+.header-lang-switcher {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  background-color: var(--c-dolomite);
+  border: 1px solid var(--c-divider);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.05em;
 }
 
-.topbar-badge-item svg {
-  width: 13px;
-  height: 13px;
-  color: var(--c-champagne);
+.header-lang-btn {
+  color: var(--c-muted);
+  text-decoration: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  line-height: 1;
 }
 
-.topbar-links {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
+.header-lang-btn:hover {
+  color: var(--c-forest);
 }
 
-.topbar-links a:hover {
-  color: var(--c-white);
+.header-lang-btn.active {
+  color: var(--c-forest);
+  background-color: var(--c-white);
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(11, 22, 18, 0.08);
 }
 
 .site-header {
